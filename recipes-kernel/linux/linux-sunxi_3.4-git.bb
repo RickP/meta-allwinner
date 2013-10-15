@@ -8,21 +8,21 @@ COMPATIBLE_MACHINE = "(mele|olinuxino-a13|cubieboard)"
 
 PR = "1"
 
-PV = "3.4.61-r0"
+PV = "3.4.61"
 # Last tested version by myself"
+SRCREV_pn-${PN} = "9ee9fc5f0988df5677f0f142b5b88a8988d283d7"
 
 MACHINE_KERNEL_PR_append = "a"
 
-SRC_URI += "https://github.com/linux-sunxi/linux-sunxi/archive/sunxi-v${PV}.tar.gz \
+SRC_URI += "git://github.com/linux-sunxi/linux-sunxi.git;branch=sunxi-3.4;protocol=git \
         file://defconfig \
-        file://screen.conf \
-        file://spdif.conf \
-        file://sata.conf \
-        file://wifi.conf \
+	file://screen.conf \	 
+	file://spdif.conf \
+	file://sata.conf \
+	file://wifi.conf \
         "
-SRC_URI[md5sum] = "3cc55e9e6588a2096f6022aea0a05222"
 
-S = "${WORKDIR}/${PN}-sunxi-v${PV}"
+S = "${WORKDIR}/git"
 
 do_package_prepend() {
 
