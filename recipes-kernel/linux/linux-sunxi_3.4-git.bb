@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "(mele|olinuxino-a13|cubieboard)"
 
 PR = "1"
 
-PV = "3.4.61"
+PV = "3.4.61-git"
 # Last tested version by myself"
 SRCREV_pn-${PN} = "9ee9fc5f0988df5677f0f142b5b88a8988d283d7"
 
