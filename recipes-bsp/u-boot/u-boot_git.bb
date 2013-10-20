@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/linux-sunxi/u-boot-sunxi.git;protocol=git;branch=sun
 SRCREV = "8a4621c488f33089d831168bfa5bae210a5684c8"
 PR = "r7"
 
-LIC_FILES_CHKSUM = "file://README;beginline=1;endline=22;md5=2687c5ebfd9cb284491c3204b726ea29"
+LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 S = "${WORKDIR}/git"
 
