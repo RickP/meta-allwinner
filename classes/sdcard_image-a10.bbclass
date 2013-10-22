@@ -69,6 +69,10 @@ IMAGE_CMD_a10-sdimg () {
 	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
 	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}//image-version-info ::
 
+  # Add script.bin and uEnv.txt
+  mcopy -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/script.bin ::
+  mcopy -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/uEnv.txt ::
+
 	# Burn Partitions
 	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
 	# If SDIMG_ROOTFS_TYPE is a .xz file use xzcat

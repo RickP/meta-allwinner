@@ -3,7 +3,7 @@ require u-boot.inc
 LICENSE = "GPLv2+"
 
 # No patches for other machines yet
-COMPATIBLE_MACHINE = "(mele|olinuxino-a13|olinuxino-a20|cubieboard)"
+COMPATIBLE_MACHINE = "(mele|olinuxino-a13|olinuxino-a20|cubieboard|cubieboard2)"
 
 DEFAULT_PREFERENCE_mele          = "1"
 DEFAULT_PREFERENCE_olinuxino-a13 = "1"
