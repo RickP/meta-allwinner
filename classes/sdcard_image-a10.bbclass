@@ -33,12 +33,15 @@ IMAGE_DEPENDS_a10-sdimg = " \
 			dosfstools-native \
 			virtual/kernel \
 			virtual/bootloader \
+			sunxi-tools-native \
 			"
 
 # SD card image name
 SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.a10-sdimg"
 
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
+
+FEXFILE = "${TOPDIR}/../meta-allwinner/conf/machine/sysconfig/${UBOOT_MACHINE}.fex"
 
 IMAGE_CMD_a10-sdimg () {
 
@@ -62,16 +65,15 @@ IMAGE_CMD_a10-sdimg () {
 	# Create a vfat image with boot files
 	BOOT_BLOCKS=$(LC_ALL=C parted -s ${SDIMG} unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
 	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
+	cp ${FEXFILE} ${WORKDIR}
+	fex2bin ${WORKDIR}/${UBOOT_MACHINE}.fex ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin ::script.bin	
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot-sunxi-with-spl.bin ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::uImage
 
 	# Add stamp file
 	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
 	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}//image-version-info ::
-
-  # Add script.bin and uEnv.txt
-  mcopy -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/script.bin ::
-  mcopy -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/uEnv.txt ::
 
 	# Burn Partitions
 	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync

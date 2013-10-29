@@ -24,12 +24,7 @@ SRC_URI[md5sum] = "3cc55e9e6588a2096f6022aea0a05222"
 
 S = "${WORKDIR}/${PN}-sunxi-v${PV}"
 
-do_package_prepend() {
-
-}
-
 do_install_append () {
-  install -d ${D}${sysconfdir}/modules-load.d
   install -m 0755 ${WORKDIR}/screen.conf ${D}${sysconfdir}/modules-load.d/screen.conf
   install -m 0755 ${WORKDIR}/spdif.conf ${D}${sysconfdir}/modules-load.d/spdif.conf
   install -m 0755 ${WORKDIR}/sata.conf ${D}${sysconfdir}/modules-load.d/sata.conf

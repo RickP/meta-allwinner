@@ -5,7 +5,7 @@ INC_PR = "r2"
 
 LIC_FILES_CHKSUM = "file://README;md5=a103ac69c166fcd98a67a9917dd7affd"
 
-COMPATIBLE_MACHINE = "(mele|cubieboard|cubieboard2)"
+COMPATIBLE_MACHINE = "(mele|cubieboard|cubieboard2|olinuxino-a20)"
 
 DEPENDS = "virtual/libx11 libxau libxdmcp libdrm dri2proto libdri2"
 
