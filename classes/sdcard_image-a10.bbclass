@@ -42,6 +42,7 @@ SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.a10-sdimg"
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 FEXFILE = "${TOPDIR}/../meta-allwinner/conf/machine/sysconfig/${UBOOT_MACHINE}.fex"
+UENVFILE = "${TOPDIR}/../meta-allwinner/conf/machine/sysconfig/${UBOOT_MACHINE}-uEnv.txt"
 
 IMAGE_CMD_a10-sdimg () {
 
@@ -68,6 +69,8 @@ IMAGE_CMD_a10-sdimg () {
 	cp ${FEXFILE} ${WORKDIR}
 	fex2bin ${WORKDIR}/${UBOOT_MACHINE}.fex ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin ::script.bin	
+	cp ${UENVFILE} ${WORKDIR}	
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${UBOOT_MACHINE}-uEnv.txt ::uEnv.txt
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot-sunxi-with-spl.bin ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::uImage
 
