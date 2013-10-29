@@ -1,6 +1,6 @@
 require linux.inc
 
-DESCRIPTION = "Linux kernel for Allwinner a10 processors"
+DESCRIPTION = "Linux kernel for Allwinner a10 & a20 processors"
 
 KERNEL_IMAGETYPE = "uImage"
 
@@ -15,12 +15,12 @@ SRCREV_pn-${PN} = "9ee9fc5f0988df5677f0f142b5b88a8988d283d7"
 MACHINE_KERNEL_PR_append = "a"
 
 SRC_URI += "git://github.com/linux-sunxi/linux-sunxi.git;branch=sunxi-3.4;protocol=git \
-        file://defconfig \
+              file://defconfig \
 	      file://screen.conf \	 
 	      file://spdif.conf \
 	      file://sata.conf \
 	      file://wifi.conf \
-        "
+           "
 
 S = "${WORKDIR}/git"
 
