@@ -69,7 +69,7 @@ IMAGE_CMD_a10-sdimg () {
 	cp ${FEXFILE} ${WORKDIR}
 	fex2bin ${WORKDIR}/${UBOOT_MACHINE}.fex ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${MACHINE}-script.bin ::script.bin	
-	cp ${UENVFILE} ${WORKDIR}	
+	cp ${UENVFILE} ${DEPLOY_DIR_IMAGE}/${UBOOT_MACHINE}-uEnv.txt 	
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${UBOOT_MACHINE}-uEnv.txt ::uEnv.txt
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot-sunxi-with-spl.bin ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::uImage
